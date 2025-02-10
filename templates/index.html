@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Kairos</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+
+  <link href="https://placehold.co/50x50/953BF8/white?text=K" rel="icon">
+  <link href="https://placehold.co/50x50/953BF8/white?text=K" rel="apple-touch-icon">
+
+
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css">
+  <style>
+    .audio-card {
+      border-radius: 12px;
+      background: #fff;
+      padding: 30px 20px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      margin: 10px;
+    }
+
+    .audio-banner {
+      width: 100%;
+      aspect-ratio: 2.5;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .audio-card img {
+      width: 100px;
+      aspect-ratio: 1;
+      box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.329);
+      border-radius: 10px;
+    }
+
+    .audio-title {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .plyr--audio {
+      width: 100%;
+      margin-top: 15px;
+      border-radius: 10px;
+    }
+
+    /* Large screens (desktops) */
+    @media (min-width: 1024px) {
+      .plyr {
+        max-width: 500px;
+      }
+
+      .plyr__controls>button {
+        font-size: 18px;
+      }
+    }
+
+
+    @media (max-width: 768px) {
+      .plyr {
+        width: 100%;
+      }
+
+      .plyr__controls {
+        justify-content: space-between;
+      }
+
+      .plyr__controls>button {
+        font-size: 16px;
+      }
+
+      #hero h2 {
+        font-size: 2rem !important;
+      }
+
+      #hero p,
+      #hero a {
+        font-size: .8rem !important;
+      }
+
+      .section-title p {
+        font-size: 1.5rem !important;
+      }
+
+      .tre * {
+        font-size: .8rem !important;
+      }
+
+      #services .service-item {
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+
+      #services .lwek {
+        font-size: 1rem !important;
+        margin-bottom: 8px !important;
+      }
+
+      #services .service-item .oioi {
+        font-size: .8rem !important;
+      }
+
+      .audio-card h4 {
+        font-size: 1rem;
+      }
+
+      #call-to-action h3 {
+        font-size: 1.2rem !important;
+      }
+
+      #call-to-action p {
+        font-size: .7rem !important;
+      }
+
+      #call-to-action a {
+        font-size: .6rem !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+
+      .plyr__controls {
+        flex-wrap: wrap;
+        /* Stack controls if needed */
+        justify-content: center;
+      }
+
+      .plyr__controls>button {
+        font-size: 14px;
+        /* Reduce button size */
+        padding: 5px;
+      }
+
+      .plyr__controls .plyr__time {
+        font-size: 12px;
+        /* Reduce time font size */
+      }
+
+      #hero h2 {
+        font-size: 1.5rem !important;
+        margin-bottom: 10px !important;
+      }
+
+      #hero p,
+      #hero a {
+        font-size: .7rem !important;
+      }
+
+      .carousel-control-next,
+      .carousel-control-prev {
+        display: none !important;
+      }
+
+      .section-title {
+        padding-bottom: 30px !important;
+      }
+
+      .section-title p {
+        font-size: 1.2rem !important;
+      }
+      #services .service-item {
+        padding-left: 40px;
+        padding-right: 20px;
+      }
+
+      #services .lwek {
+        font-size: .8rem !important;
+        margin-bottom: 8px !important;
+      }
+
+      #services .service-item .oioi {
+        font-size: .6rem !important;
+        line-height: 12px;
+      }
+
+      #services .service-item .icon {
+        left: -10px;
+        top: calc(50% - 20px);
+      }
+
+      #services .service-item .pliut {
+        font-size: 2rem !important;
+      }
+      #call-to-action{
+        padding: 50px 0;
+      }
+
+    }
+  </style>
+
+
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css'%}" rel="stylesheet">
+  <link href="{% static 'vendor/aos/aos.css'%}" rel="stylesheet">
+  <link href="{% static 'vendor/animate.css/animate.min.css'%}" rel="stylesheet">
+  <link href="{% static 'vendor/glightbox/css/glightbox.min.css'%}" rel="stylesheet">
+  <link href="{% static 'vendor/swiper/swiper-bundle.min.css'%}" rel="stylesheet">
+
+
+  <link href="{% static 'css/main.css'%}" rel="stylesheet">
+</head>
+
+<body class="index-page">
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="/" class="logo d-flex align-items-center">
+        <h1 class="sitename">{{title}}</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#hero" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section dark-background">
+
+      <div id="hero-carousel" data-bs-interval="5000" class="container carousel carousel-fade" data-bs-ride="carousel">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+          <div class="carousel-container">
+            <h2 class="animate__animated animate__fadeInDown">{{heading_text_1}}
+              <br><span>{{heading_underline_text_1}}</span>
+            </h2>
+            <p class="animate__animated animate__fadeInUp">{{heading_description_1}}</p>
+            <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+          <div class="carousel-container">
+            <h2 class="animate__animated animate__fadeInDown">{{heading_text_2}}
+              <span>{{heading_underline_text_2}}</span>
+            </h2>
+            <p class="animate__animated animate__fadeInUp">{{heading_description_2}}.</p>
+            <a href="#about" class="btn-get-started animate__animated animate__fadeInUp scrollto">Read More</a>
+          </div>
+        </div>
+
+        <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+        </a>
+
+        <a class="carousel-control-next" href="#hero-carousel" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+        </a>
+
+      </div>
+
+      <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 24 150 28 " preserveAspectRatio="none">
+        <defs>
+          <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
+        </defs>
+        <g class="wave1">
+          <use xlink:href="#wave-path" x="50" y="3"></use>
+        </g>
+        <g class="wave2">
+          <use xlink:href="#wave-path" x="50" y="0"></use>
+        </g>
+        <g class="wave3">
+          <use xlink:href="#wave-path" x="50" y="9"></use>
+        </g>
+      </svg>
+
+    </section><!-- /Hero Section -->
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>About</h2>
+        <p>Who we are</p>
+      </div><!-- End Section Title -->
+
+      <div class="container tre">
+        <div class="row gy-4">
+          <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
+            <p>
+              {{short_about}}
+            </p>
+            <ul>
+              <li><i class="bi bi-check2-circle"></i> <span>{{about_list_1}}</span></li>
+              <li><i class="bi bi-check2-circle"></i> <span>{{about_list_2}}</span></li>
+              <li><i class="bi bi-check2-circle"></i> <span>{{about_list_3}}</span></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <p>{{long_about}} </p>
+            <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /About Section -->
+
+    <!-- Features Section -->
+    <section id="features" class="features section">
+
+      <div class="container tre">
+
+        <ul class="nav nav-tabs row  d-flex" data-aos="fade-up" data-aos-delay="100">
+          <li class="nav-item col-3">
+            <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
+              <i class="bi bi-cash-stack"></i>
+              <h4 class="d-none d-lg-block">Music Production</h4>
+            </a>
+          </li>
+          <li class="nav-item col-3">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-2">
+              <i class="bi bi-boombox"></i>
+              <h4 class="d-none d-lg-block">Live Performance</h4>
+            </a>
+          </li>
+          <li class="nav-item col-3">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-3">
+              <i class="bi bi-mic-fill"></i>
+              <h4 class="d-none d-lg-block">Music Direction</h4>
+            </a>
+          </li>
+          <li class="nav-item col-3">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-4">
+              <i class="bi bi-vinyl"></i>
+              <h4 class="d-none d-lg-block">Mixing</h4>
+            </a>
+          </li>
+        </ul><!-- End Tab Nav -->
+
+        <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
+
+          <div class="tab-pane fade active show" id="features-tab-1">
+            <div class="row">
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+                <p class="fst-italic">
+                  We take your raw ideas and turn them into fully produced tracks. From the first spark of inspiration
+                  to the final mix, we make sure every detail sounds just right.
+                </p>
+                <ul>
+                  <li><i class="bi bi-check2-all"></i>
+                    <spab>Bringing your vision to life, one note at a time.</spab>
+                  </li>
+                  <li><i class="bi bi-check2-all"></i> <span>Crafting tracks that feel authentic and powerful.</span>
+                  </li>
+                  <li><i class="bi bi-check2-all"></i> <span>Every sound is shaped to make an impact.</span></li>
+                </ul>
+                <p>
+                  Music isn’t just sound—it’s a feeling. We help you create tracks that connect with people and leave a
+                  lasting impression.
+                </p>
+              </div>
+              <div class="col-lg-6 order-1 order-lg-2 text-center ">
+                <img src="{% static 'img/working-1.jpg'%}" alt="" class="img-fluid">
+              </div>
+            </div>
+          </div><!-- End Tab Content Item -->
+
+          <div class="tab-pane fade" id="features-tab-2">
+            <div class="row">
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+                <p>
+                  Whether it's a small gathering or a packed venue, we bring energy, passion, and connection to every
+                  performance. We know how to read the room and keep the vibe alive.
+                </p>
+                <ul>
+                  <li><i class="bi bi-check2-all"></i> <span>Every show is tailored to fit the moment.</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Creating performances that feel personal and real.</span>
+                  </li>
+                  <li><i class="bi bi-check2-all"></i> <span>We make sure every note hits the right emotion.</span></li>
+                </ul>
+              </div>
+              <div class="col-lg-6 order-1 order-lg-2 text-center">
+                <img src="{% static 'img/working-2.jpg'%}" alt="" class="img-fluid">
+              </div>
+              <p>A great performance is more than just playing music—it’s about creating moments people will remember.
+              </p>
+            </div>
+          </div><!-- End Tab Content Item -->
+
+          <div class="tab-pane fade" id="features-tab-3">
+            <div class="row">
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+                <p>
+                  We help shape the creative direction of your project, making sure every piece fits together perfectly.
+                  From rehearsals to final production, we guide the process so your music stays true to your vision.
+                </p>
+                <ul>
+                  <li><i class="bi bi-check2-all"></i> <span>Helping you bring clarity and purpose to your sound.</span>
+                  </li>
+                  <li><i class="bi bi-check2-all"></i> <span>Fine-tuning every detail so nothing feels out of
+                      place.</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Making sure your music speaks the way you want it
+                      to.</span></li>
+                </ul>
+                <p class="fst-italic">
+                  Great music doesn’t happen by accident—it’s built with care, creativity, and the right direction.
+                </p>
+              </div>
+              <div class="col-lg-6 order-1 order-lg-2 text-center">
+                <img src="{% static 'img/working-3.jpg'%}" alt="" class="img-fluid">
+              </div>
+            </div>
+          </div><!-- End Tab Content Item -->
+
+          <div class="tab-pane fade" id="features-tab-4">
+            <div class="row">
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0">
+                <p>We take your song and bring out the best in it, balancing vocals, instruments, and effects to make
+                  sure everything sounds clean, clear, and full of life.</p>
+
+                <ul>
+                  <li><i class="bi bi-check2-all"></i> <span>Every instrument and voice sits perfectly in the
+                      mix.</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Enhancing depth, clarity, and emotion in your track.</span>
+                  </li>
+                  <li><i class="bi bi-check2-all"></i> <span>Making sure your music sounds great everywhere, from
+                      earbuds to big speakers.</span></li>
+                </ul>
+                <p>Mixing isn’t just about adjusting levels—it’s about making your music feel alive.</p>
+              </div>
+              <div class="col-lg-6 order-1 order-lg-2 text-center">
+                <img src="{% static 'img/working-4.jpg'%}" alt="" class="img-fluid">
+              </div>
+            </div>
+          </div><!-- End Tab Content Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Features Section -->
+
+    <!-- Call To Action Section -->
+    <section id="call-to-action" class="call-to-action section dark-background">
+
+      <div class="container">
+
+        <div class="row" data-aos="zoom-in" data-aos-delay="100">
+          <div class="col-xl-9 text-center text-xl-start">
+            <h3>Let’s Collaborate</h3>
+            <p>Got an idea or a project? Let’s make it happen. Reach out, and let’s create something
+              incredible together.</p>
+          </div>
+          <div class="col-xl-3 cta-btn-container text-center">
+            <a class="cta-btn align-middle" href="https://www.instagram.com/kairoskeys/" target="_blank">Let's talk on
+              Instagram</a>
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /Call To Action Section -->
+
+    <!-- Services Section -->
+    <section id="services" class="services section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Services</h2>
+        <p>What we offer</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="pliut bi bi-cash-stack" style="color: #0dcaf0;"></i>
+              </div>
+              <h3 class="lwek">{{what_offered_title_1}}</h3>
+              <p class="oioi">{{what_offered_description_1}}</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="pliut bi bi-boombox" style="color: #fd7e14;"></i>
+              </div>
+              <h3 class="lwek">{{what_offered_title_2}}</h3>
+              <p class="oioi">{{what_offered_description_2}}</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="pliut bi bi-mic-fill" style="color: #20c997;"></i>
+              </div>
+              <h3 class="lwek">{{what_offered_title_3}}</h3>
+              <p class="oioi">{{what_offered_description_3}}</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="pliut bi bi-vinyl" style="color: #df1529;"></i>
+              </div>
+              <h3 class="lwek">{{what_offered_title_4}}</h3>
+              <p class="oioi">{{what_offered_description_4}}</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="pliut bi bi-music-player" style="color: #6610f2;"></i>
+              </div>
+              <h3 class="lwek">{{what_offered_title_5}}</h3>
+              <p class="oioi">{{what_offered_description_5}}</p>
+            </div>
+          </div><!-- End Service Item -->
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+            <div class="service-item position-relative">
+              <div class="icon">
+                <i class="pliut bi bi-music-note-list" style="color: #f3268c;"></i>
+              </div>
+              <h3 class="lwek">{{what_offered_title_6}}</h3>
+              <p class="oioi">{{what_offered_description_6}}</p>
+            </div>
+          </div><!-- End Service Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Services Section -->
+
+    <!-- Portfolio Section -->
+
+    {% if audios|length >= 1 %}
+    <section id="portfolio" class="portfolio section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Portfolio</h2>
+        <p>What we've done</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+          <!-- <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+            <li data-filter="*" class="filter-active">All</li>
+            <li data-filter=".filter-Gospel">Gospel</li>
+            <li data-filter=".filter-Afro">Afro</li>
+            <li data-filter=".filter-Other">Other</li>
+          </ul> -->
+
+          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
+            {% for audio in audios %}
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-{{audio.genre}}">
+              <div class="audio-card" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2)), 
+                          url('{{ audio.file_cover.url }}'); 
+                          background-size: cover; 
+                          background-position: center; 
+                          background-repeat: no-repeat; 
+                          border-radius: 10px;
+                          position: relative;
+                          display: flex;
+                          flex-direction: column;
+                          align-items: flex-start;
+                          justify-content: flex-end;
+                          padding: 30px 20px;">
+
+                <div class="d-flex align-items-end justify-content-end">
+                  <img src="{{audio.file_cover.url}}" alt="{{audio.name}}">
+                  <h4 class="mx-2 text-light">{{audio.name}}</h4>
+                </div>
+
+                <audio class="plyr" controls>
+                  <source src="{{audio.file.url}}" type="audio/mp3">
+                </audio>
+              </div>
+            </div>
+
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
+    {% if testimonials|length >= 1 %}
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Testimonials</h2>
+        <p>What they are saying about us</p>
+      </div><!-- End Section Title -->
+
+      <div class="container tre" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 600,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": "auto",
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              },
+              "breakpoints": {
+                "320": {
+                  "slidesPerView": 1,
+                  "spaceBetween": 40
+                },
+                "1200": {
+                  "slidesPerView": 3,
+                  "spaceBetween": 10
+                }
+              }
+            }
+          </script>
+          <div class="swiper-wrapper">
+            {% for testimony in testimonials %}
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <img src="{{testimony.user_image.url}}" class="testimonial-img" alt="">
+                <h3>{{testimony.name}}</h3>
+                <h4>{{testimony.who_you_are}}</h4>
+                <div class="stars">
+                  {% for _ in ""|rjust:testimony.rating %}<i class="bi bi-star-fill"></i>
+                  {% endfor %}
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>{{testimony.testimony}}</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+
+    </section><!-- /Testimonials Section -->
+
+    {% endif %}
+
+    {% if faq|length >= 1 %}
+    <!-- Faq Section -->
+    <section id="faq" class="faq section">
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Frequently Asked Questions</h2>
+        <p>Frequently Asked Questions</p>
+      </div><!-- End Section Title -->
+
+      <div class="container tre" data-aos="fade-up">
+        <div class="row">
+          <div class="col-12">
+            <div class="custom-accordion" id="accordion-faq">
+              {% for f in faq %}
+              <div class="accordion-item">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapse-faq-{{f.id}}">
+                    {{f.question}}?
+                  </button>
+                </h2>
+
+                <div id="collapse-faq-{{f.id}}" class="collapse" aria-labelledby="headingThree"
+                  data-parent="#accordion-faq">
+                  <div class="accordion-body">
+                    {{f.answer}}
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- /Faq Section -->
+
+    {% endif %}
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Contact</h2>
+        <p>Contact Us</p>
+      </div><!-- End Section Title -->
+
+      <div class="container tre" data-aos="fade" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+              <i class="bi bi-telephone flex-shrink-0"></i>
+              <div>
+                <h3>Call Us</h3>
+                <p>+2349153050509</p>
+              </div>
+            </div><!-- End Info Item -->
+
+            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+              <i class="bi bi-envelope flex-shrink-0"></i>
+              <div>
+                <h3>Email Us</h3>
+                <p>akingbadetolu247@gmail.com</p>
+              </div>
+            </div><!-- End Info Item -->
+
+          </div>
+
+          <div class="col-lg-8">
+            <form action="https://getform.io/f/bvrweevb" method="post" class="email-form" data-aos="fade-up"
+              data-aos-delay="200">
+              {% csrf_token %}
+              <div class="row gy-4">
+
+                <div class="col-md-6">
+                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                </div>
+
+                <div class="col-md-6 ">
+                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                </div>
+
+                <div class="col-md-12">
+                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                </div>
+
+                <div class="col-md-12 text-center">
+                  <button type="submit">Send Message</button>
+                </div>
+
+              </div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer id="footer" class="footer dark-background">
+    <div class="container tre">
+      <h3 class="sitename">{{title}}</h3>
+      <p>{{heading_text_1}} {{heading_underline_text_1}}</p>
+      <div class="social-links d-flex justify-content-center">
+        <a href="https://wa.link/uqyxpl" target="_blank"><i class="bi bi-whatsapp"></i></a>
+        <a href=mailto:"https://akingabdetolu247@gmail.com" target="_blank"><i class="bi bi-envelope"></i></a>
+        <a href="https://www.instagram.com/kairoskeys/" target="_blank"><i class="bi bi-instagram"></i></a>
+      </div>
+      <div class="container">
+        <div class="copyright">
+          <span>Copyright ©</span> <strong class="px-1 sitename">2025 Kairos</strong> <span>All Rights Reserved</span>
+        </div>
+        <div class="credits">
+          Portfolio by <a href=mailto:"boluwatife8081@gmail.com">Boluwatife Akingbade</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{% static 'vendor/aos/aos.js'%}"></script>
+  <script src="{% static 'vendor/glightbox/js/glightbox.min.js'%}"></script>
+  <script src="{% static 'vendor/imagesloaded/imagesloaded.pkgd.min.js'%}"></script>
+  <script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js'%}"></script>
+  <script src="{% static 'vendor/swiper/swiper-bundle.min.js'%}"></script>
+
+  <!-- Main JS File -->
+  <script src="{% static 'js/main.js'%}"></script>
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const players = Plyr.setup('.plyr', {
+        controls: ['play', 'progress', 'current-time', 'mute'],
+        autoplay: false
+      });
+    });
+  </script>
+
+</body>
+
+</html>

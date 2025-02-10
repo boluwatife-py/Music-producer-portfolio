@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review | Kairos</title>
+
+  <link href="https://placehold.co/50x50/953BF8/white?text=K" rel="icon">
+  <link href="https://placehold.co/50x50/953BF8/white?text=K" rel="apple-touch-icon">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .formbold-main-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+    }
+
+    .formbold-form-wrapper {
+      margin: 0 auto;
+      max-width: 570px;
+      width: 100%;
+      background: white;
+      padding: 40px;
+    }
+
+    .formbold-form-img {
+      margin: auto;
+      margin-bottom: 45px;
+      width: 30%;
+      display: block;
+    }
+
+    .formbold-input-group {
+      margin-bottom: 18px;
+    }
+
+    .formbold-form-select {
+      width: 100%;
+      padding: 12px 22px;
+      border-radius: 5px;
+      border: 1px solid #dde3ec;
+      background: #ffffff;
+      font-size: 16px;
+      color: #536387;
+      outline: none;
+      resize: none;
+    }
+
+    .formbold-input-radio-wrapper {
+      margin-bottom: 25px;
+    }
+
+    .formbold-radio-flex {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .formbold-radio-label {
+      font-size: 14px;
+      line-height: 24px;
+      color: #07074d;
+      position: relative;
+      padding-left: 25px;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .formbold-input-radio {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .formbold-radio-checkmark {
+      position: absolute;
+      top: -1px;
+      left: 0;
+      height: 18px;
+      width: 18px;
+      background-color: #ffffff;
+      border: 1px solid #dde3ec;
+      border-radius: 50%;
+    }
+
+    .formbold-radio-label .formbold-input-radio:checked~.formbold-radio-checkmark {
+      background-color: #6a64f1;
+    }
+
+    .formbold-radio-checkmark:after {
+      content: '';
+      position: absolute;
+      display: none;
+    }
+
+    .formbold-radio-label .formbold-input-radio:checked~.formbold-radio-checkmark:after {
+      display: block;
+    }
+
+    .formbold-radio-label .formbold-radio-checkmark:after {
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ffffff;
+      transform: translate(-50%, -50%);
+    }
+
+    .formbold-form-input {
+      width: 100%;
+      padding: 13px 22px;
+      border-radius: 5px;
+      border: 1px solid #dde3ec;
+      background: #ffffff;
+      font-weight: 500;
+      font-size: 16px;
+      color: #07074d;
+      outline: none;
+      resize: none;
+      transition: .1s;
+    }
+
+    .formbold-form-input::placeholder {
+      color: #536387;
+      font-weight: 400;
+    }
+
+    .formbold-form-input:focus {
+      border-color: #6a64f1;
+      box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .formbold-form-label {
+      color: #07074d;
+      font-size: 14px;
+      line-height: 24px;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .formbold-btn {
+      text-align: center;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 5px;
+      padding: 14px 25px;
+      border: none;
+      font-weight: 500;
+      background-color: #6a64f1;
+      color: white;
+      cursor: pointer;
+      margin-top: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .formbold-btn:hover {
+      box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    textarea {
+      font-size: 14px !important;
+      font-family: Inter;
+    }
+
+    .formbold-input-file {
+      margin-top: 30px;
+    }
+
+    .formbold-input-file input[type="file"] {
+      position: absolute;
+      top: 6px;
+      left: 0;
+      z-index: -1;
+    }
+
+    .formbold-input-file .formbold-input-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+    }
+
+    .formbold-form-input.error {
+      border: thin solid #FF3737;
+    }
+
+    .formbold-filename-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 22px;
+    }
+
+    .formbold-filename {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      line-height: 24px;
+      color: #536387;
+    }
+
+    .formbold-filename svg {
+      cursor: pointer;
+    }
+
+    .loader {
+      animation: spin 1.5s cubic-bezier(.08, .82, .53, 1) infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .formbold-error {
+      margin-top: 5px;
+      font-size: 14px;
+      color: #FF3737;
+      display: flex;
+      visibility: hidden;
+      align-items: center;
+      justify-content: space-between;
+      transition: .1s;
+    }
+
+    .formbold-error.show {
+      visibility: visible;
+    }
+
+    .formbold-error svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    #alert-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 300px;
+      z-index: 1000;
+    }
+
+    .alert {
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      color: white;
+      position: relative;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      animation: fade .3s ease forwards;
+    }
+
+    @keyframes fade {
+      from{
+        opacity: 0;
+      }to{
+        opacity: 1;
+      }
+    }
+
+    .alert-success {
+      background-color: #4CAF50;
+    }
+
+    .alert-error {
+      background-color: #f44336;
+    }
+
+    .close-alert {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 480px) {
+      .formbold-main-wrapper {
+        padding: 48px 10px;
+      }
+
+      .alert {
+        font-size: 10px;
+      }
+
+      .formbold-form-wrapper {
+        padding: 40px 10px;
+      }
+
+      .formbold-form-label {
+        margin-bottom: 0px;
+        font-size: 12px;
+      }
+
+      .formbold-form-input {
+        padding: 13px 10px;
+        font-size: 12px;
+      }
+
+      .formbold-radio-label {
+        font-size: 12px;
+      }
+
+      .formbold-error {
+        margin-top: 3px;
+      }
+
+      .formbold-btn,
+      .formbold-error {
+        font-size: 10px;
+      }
+
+      .formbold-error svg {
+        width: 10px;
+        height: 10px;
+      }
+
+      .formbold-radio-flex {
+        gap: 10px;
+      }
+
+      textarea,
+      .up-text {
+        font-size: 12px !important;
+      }
+
+      .formbold-input-file .formbold-input-label {
+        gap: 5px;
+      }
+
+      .formbold-filename {
+        font-size: 10px;
+      }
+
+      .loader svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .formbold-input-group {
+        margin-bottom: 5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  {% if messages %}
+  <div id="alert-container">
+    {% for message in messages %}
+    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+      {{ message }}
+      <span class="close-alert" onclick="this.parentElement.style.display='none';">&times;</span>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="formbold-main-wrapper">
+    <div class="formbold-form-wrapper">
+      <a href="/"><img src="{%static 'img/KAIROS.png'%}" class="formbold-form-img"></a>
+      <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="formbold-input-group">
+          <label for="name" class="formbold-form-label">Your Name </label>
+          <input type="text" name="name" id="name" placeholder="e.g John Doe" class="formbold-form-input" />
+          <div class="formbold-error" id="name-error">
+            <span>Please provide your name</span>
+            <svg width="64px" height="64px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+              stroke="#FF3737">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M7.493 0.015 C 7.442 0.021,7.268 0.039,7.107 0.055 C 5.234 0.242,3.347 1.208,2.071 2.634 C 0.660 4.211,-0.057 6.168,0.009 8.253 C 0.124 11.854,2.599 14.903,6.110 15.771 C 8.169 16.280,10.433 15.917,12.227 14.791 C 14.017 13.666,15.270 11.933,15.771 9.887 C 15.943 9.186,15.983 8.829,15.983 8.000 C 15.983 7.171,15.943 6.814,15.771 6.113 C 14.979 2.878,12.315 0.498,9.000 0.064 C 8.716 0.027,7.683 -0.006,7.493 0.015 M8.853 1.563 C 9.967 1.707,11.010 2.136,11.944 2.834 C 12.273 3.080,12.920 3.727,13.166 4.056 C 13.727 4.807,14.142 5.690,14.330 6.535 C 14.544 7.500,14.544 8.500,14.330 9.465 C 13.916 11.326,12.605 12.978,10.867 13.828 C 10.239 14.135,9.591 14.336,8.880 14.444 C 8.456 14.509,7.544 14.509,7.120 14.444 C 5.172 14.148,3.528 13.085,2.493 11.451 C 2.279 11.114,1.999 10.526,1.859 10.119 C 1.618 9.422,1.514 8.781,1.514 8.000 C 1.514 6.961,1.715 6.075,2.160 5.160 C 2.500 4.462,2.846 3.980,3.413 3.413 C 3.980 2.846,4.462 2.500,5.160 2.160 C 6.313 1.599,7.567 1.397,8.853 1.563 M7.706 4.290 C 7.482 4.363,7.355 4.491,7.293 4.705 C 7.257 4.827,7.253 5.106,7.259 6.816 C 7.267 8.786,7.267 8.787,7.325 8.896 C 7.398 9.033,7.538 9.157,7.671 9.204 C 7.803 9.250,8.197 9.250,8.329 9.204 C 8.462 9.157,8.602 9.033,8.675 8.896 C 8.733 8.787,8.733 8.786,8.741 6.816 C 8.749 4.664,8.749 4.662,8.596 4.481 C 8.472 4.333,8.339 4.284,8.040 4.276 C 7.893 4.272,7.743 4.278,7.706 4.290 M7.786 10.530 C 7.597 10.592,7.410 10.753,7.319 10.932 C 7.249 11.072,7.237 11.325,7.294 11.495 C 7.388 11.780,7.697 12.000,8.000 12.000 C 8.303 12.000,8.612 11.780,8.706 11.495 C 8.763 11.325,8.751 11.072,8.681 10.932 C 8.616 10.804,8.460 10.646,8.333 10.580 C 8.217 10.520,7.904 10.491,7.786 10.530 "
+                  stroke="none" fill-rule="evenodd" fill="#FF3737"></path>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div class="formbold-input-group">
+          <label for="who_you_are" class="formbold-form-label"> Who You Are </label>
+          <input type="text" name="who_you_are" id="who_you_are" placeholder="e.g Music Producer"
+            class="formbold-form-input" />
+          <div class="formbold-error" id="who_you_are-error">
+            <span>Please provide who you are</span>
+            <svg width="64px" height="64px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+              stroke="#FF3737">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M7.493 0.015 C 7.442 0.021,7.268 0.039,7.107 0.055 C 5.234 0.242,3.347 1.208,2.071 2.634 C 0.660 4.211,-0.057 6.168,0.009 8.253 C 0.124 11.854,2.599 14.903,6.110 15.771 C 8.169 16.280,10.433 15.917,12.227 14.791 C 14.017 13.666,15.270 11.933,15.771 9.887 C 15.943 9.186,15.983 8.829,15.983 8.000 C 15.983 7.171,15.943 6.814,15.771 6.113 C 14.979 2.878,12.315 0.498,9.000 0.064 C 8.716 0.027,7.683 -0.006,7.493 0.015 M8.853 1.563 C 9.967 1.707,11.010 2.136,11.944 2.834 C 12.273 3.080,12.920 3.727,13.166 4.056 C 13.727 4.807,14.142 5.690,14.330 6.535 C 14.544 7.500,14.544 8.500,14.330 9.465 C 13.916 11.326,12.605 12.978,10.867 13.828 C 10.239 14.135,9.591 14.336,8.880 14.444 C 8.456 14.509,7.544 14.509,7.120 14.444 C 5.172 14.148,3.528 13.085,2.493 11.451 C 2.279 11.114,1.999 10.526,1.859 10.119 C 1.618 9.422,1.514 8.781,1.514 8.000 C 1.514 6.961,1.715 6.075,2.160 5.160 C 2.500 4.462,2.846 3.980,3.413 3.413 C 3.980 2.846,4.462 2.500,5.160 2.160 C 6.313 1.599,7.567 1.397,8.853 1.563 M7.706 4.290 C 7.482 4.363,7.355 4.491,7.293 4.705 C 7.257 4.827,7.253 5.106,7.259 6.816 C 7.267 8.786,7.267 8.787,7.325 8.896 C 7.398 9.033,7.538 9.157,7.671 9.204 C 7.803 9.250,8.197 9.250,8.329 9.204 C 8.462 9.157,8.602 9.033,8.675 8.896 C 8.733 8.787,8.733 8.786,8.741 6.816 C 8.749 4.664,8.749 4.662,8.596 4.481 C 8.472 4.333,8.339 4.284,8.040 4.276 C 7.893 4.272,7.743 4.278,7.706 4.290 M7.786 10.530 C 7.597 10.592,7.410 10.753,7.319 10.932 C 7.249 11.072,7.237 11.325,7.294 11.495 C 7.388 11.780,7.697 12.000,8.000 12.000 C 8.303 12.000,8.612 11.780,8.706 11.495 C 8.763 11.325,8.751 11.072,8.681 10.932 C 8.616 10.804,8.460 10.646,8.333 10.580 C 8.217 10.520,7.904 10.491,7.786 10.530 "
+                  stroke="none" fill-rule="evenodd" fill="#FF3737"></path>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+
+        <div class="formbold-input-radio-wrapper">
+          <label for="ans" class="formbold-form-label">
+            Select A Rating
+          </label>
+
+          <div class="formbold-radio-flex">
+            <div class="formbold-radio-group">
+              <label class="formbold-radio-label">
+                <input class="formbold-input-radio" type="radio" name="rating" id="ans" value="5" />
+                5 - Excellent
+                <span class="formbold-radio-checkmark"></span>
+              </label>
+            </div>
+
+            <div class="formbold-radio-group">
+              <label class="formbold-radio-label">
+                <input class="formbold-input-radio" type="radio" name="rating" id="ans" value="4" />
+                4 - Very Good
+                <span class="formbold-radio-checkmark"></span>
+              </label>
+            </div>
+
+            <div class="formbold-radio-group">
+              <label class="formbold-radio-label">
+                <input class="formbold-input-radio" type="radio" name="rating" id="ans" value="3" />
+                3 - Good
+                <span class="formbold-radio-checkmark"></span>
+              </label>
+            </div>
+
+            <div class="formbold-radio-group">
+              <label class="formbold-radio-label">
+                <input class="formbold-input-radio" type="radio" name="rating" id="ans" value="2" />
+                2 - Fair
+                <span class="formbold-radio-checkmark"></span>
+              </label>
+            </div>
+
+            <div class="formbold-radio-group">
+              <label class="formbold-radio-label">
+                <input class="formbold-input-radio" type="radio" name="rating" id="ans" value="1" />
+                1 - Poor
+                <span class="formbold-radio-checkmark"></span>
+              </label>
+            </div>
+            <div class="formbold-error" id="rating-error">
+              <span>Please select a rating</span>
+              <svg width="64px" height="64px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+                stroke="#FF3737">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M7.493 0.015 C 7.442 0.021,7.268 0.039,7.107 0.055 C 5.234 0.242,3.347 1.208,2.071 2.634 C 0.660 4.211,-0.057 6.168,0.009 8.253 C 0.124 11.854,2.599 14.903,6.110 15.771 C 8.169 16.280,10.433 15.917,12.227 14.791 C 14.017 13.666,15.270 11.933,15.771 9.887 C 15.943 9.186,15.983 8.829,15.983 8.000 C 15.983 7.171,15.943 6.814,15.771 6.113 C 14.979 2.878,12.315 0.498,9.000 0.064 C 8.716 0.027,7.683 -0.006,7.493 0.015 M8.853 1.563 C 9.967 1.707,11.010 2.136,11.944 2.834 C 12.273 3.080,12.920 3.727,13.166 4.056 C 13.727 4.807,14.142 5.690,14.330 6.535 C 14.544 7.500,14.544 8.500,14.330 9.465 C 13.916 11.326,12.605 12.978,10.867 13.828 C 10.239 14.135,9.591 14.336,8.880 14.444 C 8.456 14.509,7.544 14.509,7.120 14.444 C 5.172 14.148,3.528 13.085,2.493 11.451 C 2.279 11.114,1.999 10.526,1.859 10.119 C 1.618 9.422,1.514 8.781,1.514 8.000 C 1.514 6.961,1.715 6.075,2.160 5.160 C 2.500 4.462,2.846 3.980,3.413 3.413 C 3.980 2.846,4.462 2.500,5.160 2.160 C 6.313 1.599,7.567 1.397,8.853 1.563 M7.706 4.290 C 7.482 4.363,7.355 4.491,7.293 4.705 C 7.257 4.827,7.253 5.106,7.259 6.816 C 7.267 8.786,7.267 8.787,7.325 8.896 C 7.398 9.033,7.538 9.157,7.671 9.204 C 7.803 9.250,8.197 9.250,8.329 9.204 C 8.462 9.157,8.602 9.033,8.675 8.896 C 8.733 8.787,8.733 8.786,8.741 6.816 C 8.749 4.664,8.749 4.662,8.596 4.481 C 8.472 4.333,8.339 4.284,8.040 4.276 C 7.893 4.272,7.743 4.278,7.706 4.290 M7.786 10.530 C 7.597 10.592,7.410 10.753,7.319 10.932 C 7.249 11.072,7.237 11.325,7.294 11.495 C 7.388 11.780,7.697 12.000,8.000 12.000 C 8.303 12.000,8.612 11.780,8.706 11.495 C 8.763 11.325,8.751 11.072,8.681 10.932 C 8.616 10.804,8.460 10.646,8.333 10.580 C 8.217 10.520,7.904 10.491,7.786 10.530 "
+                    stroke="none" fill-rule="evenodd" fill="#FF3737"></path>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label for="message" class="formbold-form-label">
+            Your Testimony
+          </label>
+          <textarea rows="8" name="testimony" id="message" placeholder="Write your review here"
+            class="formbold-form-input"></textarea>
+          <div class="formbold-error" id="review-error">
+            <span>Please provide a review</span>
+            <svg width="64px" height="64px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+              stroke="#FF3737">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M7.493 0.015 C 7.442 0.021,7.268 0.039,7.107 0.055 C 5.234 0.242,3.347 1.208,2.071 2.634 C 0.660 4.211,-0.057 6.168,0.009 8.253 C 0.124 11.854,2.599 14.903,6.110 15.771 C 8.169 16.280,10.433 15.917,12.227 14.791 C 14.017 13.666,15.270 11.933,15.771 9.887 C 15.943 9.186,15.983 8.829,15.983 8.000 C 15.983 7.171,15.943 6.814,15.771 6.113 C 14.979 2.878,12.315 0.498,9.000 0.064 C 8.716 0.027,7.683 -0.006,7.493 0.015 M8.853 1.563 C 9.967 1.707,11.010 2.136,11.944 2.834 C 12.273 3.080,12.920 3.727,13.166 4.056 C 13.727 4.807,14.142 5.690,14.330 6.535 C 14.544 7.500,14.544 8.500,14.330 9.465 C 13.916 11.326,12.605 12.978,10.867 13.828 C 10.239 14.135,9.591 14.336,8.880 14.444 C 8.456 14.509,7.544 14.509,7.120 14.444 C 5.172 14.148,3.528 13.085,2.493 11.451 C 2.279 11.114,1.999 10.526,1.859 10.119 C 1.618 9.422,1.514 8.781,1.514 8.000 C 1.514 6.961,1.715 6.075,2.160 5.160 C 2.500 4.462,2.846 3.980,3.413 3.413 C 3.980 2.846,4.462 2.500,5.160 2.160 C 6.313 1.599,7.567 1.397,8.853 1.563 M7.706 4.290 C 7.482 4.363,7.355 4.491,7.293 4.705 C 7.257 4.827,7.253 5.106,7.259 6.816 C 7.267 8.786,7.267 8.787,7.325 8.896 C 7.398 9.033,7.538 9.157,7.671 9.204 C 7.803 9.250,8.197 9.250,8.329 9.204 C 8.462 9.157,8.602 9.033,8.675 8.896 C 8.733 8.787,8.733 8.786,8.741 6.816 C 8.749 4.664,8.749 4.662,8.596 4.481 C 8.472 4.333,8.339 4.284,8.040 4.276 C 7.893 4.272,7.743 4.278,7.706 4.290 M7.786 10.530 C 7.597 10.592,7.410 10.753,7.319 10.932 C 7.249 11.072,7.237 11.325,7.294 11.495 C 7.388 11.780,7.697 12.000,8.000 12.000 C 8.303 12.000,8.612 11.780,8.706 11.495 C 8.763 11.325,8.751 11.072,8.681 10.932 C 8.616 10.804,8.460 10.646,8.333 10.580 C 8.217 10.520,7.904 10.491,7.786 10.530 "
+                  stroke="none" fill-rule="evenodd" fill="#FF3737"></path>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div class="formbold-input-file">
+          <div class="formbold-filename-wrapper" id="fileList">
+          </div>
+          <label for="upload" class="formbold-input-label" style="cursor: pointer;">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_1670_1531)">
+                <path
+                  d="M12.3568 6.4644L7.64349 11.1786C7.5639 11.2554 7.50041 11.3474 7.45674 11.4491C7.41307 11.5507 7.39008 11.6601 7.38912 11.7707C7.38815 11.8814 7.40924 11.9911 7.45114 12.0935C7.49304 12.1959 7.55492 12.289 7.63316 12.3672C7.71141 12.4455 7.80445 12.5073 7.90686 12.5492C8.00928 12.5912 8.11901 12.6122 8.22966 12.6113C8.34031 12.6103 8.44966 12.5873 8.55133 12.5436C8.653 12.5 8.74495 12.4365 8.82182 12.3569L13.536 7.64356C14.0049 7.17468 14.2683 6.53875 14.2683 5.87565C14.2683 5.21255 14.0049 4.57661 13.536 4.10773C13.0671 3.63885 12.4312 3.37544 11.7681 3.37544C11.105 3.37544 10.469 3.63885 10.0002 4.10773L5.28599 8.8219C4.89105 9.20701 4.57652 9.6667 4.36062 10.1743C4.14473 10.6819 4.03178 11.2274 4.02832 11.779C4.02487 12.3306 4.13097 12.8774 4.34049 13.3877C4.55 13.8979 4.85876 14.3615 5.24884 14.7516C5.63892 15.1416 6.10256 15.4503 6.61287 15.6597C7.12318 15.8692 7.67 15.9752 8.2216 15.9717C8.77321 15.9681 9.31862 15.8551 9.82621 15.6391C10.3338 15.4232 10.7934 15.1086 11.1785 14.7136L15.8927 10.0002L17.071 11.1786L12.3568 15.8927C11.8151 16.4344 11.172 16.8641 10.4643 17.1573C9.75649 17.4505 8.99791 17.6014 8.23182 17.6014C7.46574 17.6014 6.70716 17.4505 5.99939 17.1573C5.29162 16.8641 4.64853 16.4344 4.10682 15.8927C3.56512 15.351 3.13542 14.7079 2.84225 14.0002C2.54908 13.2924 2.39819 12.5338 2.39819 11.7677C2.39819 11.0016 2.54908 10.2431 2.84225 9.5353C3.13542 8.82753 3.56512 8.18443 4.10682 7.64273L8.82182 2.9294C9.60767 2.17041 10.6602 1.75043 11.7527 1.75992C12.8451 1.76942 13.8902 2.20762 14.6627 2.98015C15.4353 3.75269 15.8735 4.79774 15.883 5.89023C15.8925 6.98271 15.4725 8.03522 14.7135 8.82106L10.0002 13.5369C9.76794 13.7691 9.49226 13.9532 9.18887 14.0788C8.88548 14.2045 8.56032 14.2691 8.23195 14.2691C7.90357 14.269 7.57843 14.2043 7.27507 14.0786C6.97171 13.9529 6.69607 13.7687 6.46391 13.5365C6.23174 13.3043 6.04759 13.0286 5.92196 12.7252C5.79633 12.4218 5.7317 12.0966 5.73173 11.7683C5.73177 11.4399 5.79649 11.1148 5.92219 10.8114C6.04788 10.508 6.2321 10.2324 6.46432 10.0002L11.1785 5.28606L12.3568 6.4644Z"
+                  fill="#07074D" />
+              </g>
+              <defs>
+                <clipPath id="clip0_1670_1531">
+                  <rect width="20" height="20" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+            <span class="up-text it">Upload Your Image</span>
+            <input type="file" name="user_image" id="upload" accept="image/*">
+          </label>
+          <div class="formbold-error" id="upload-error">
+            <span>Please select an image file (JPEG, PNG, GIF, etc.).</span>
+            <svg width="64px" height="64px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+              stroke="#FF3737">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M7.493 0.015 C 7.442 0.021,7.268 0.039,7.107 0.055 C 5.234 0.242,3.347 1.208,2.071 2.634 C 0.660 4.211,-0.057 6.168,0.009 8.253 C 0.124 11.854,2.599 14.903,6.110 15.771 C 8.169 16.280,10.433 15.917,12.227 14.791 C 14.017 13.666,15.270 11.933,15.771 9.887 C 15.943 9.186,15.983 8.829,15.983 8.000 C 15.983 7.171,15.943 6.814,15.771 6.113 C 14.979 2.878,12.315 0.498,9.000 0.064 C 8.716 0.027,7.683 -0.006,7.493 0.015 M8.853 1.563 C 9.967 1.707,11.010 2.136,11.944 2.834 C 12.273 3.080,12.920 3.727,13.166 4.056 C 13.727 4.807,14.142 5.690,14.330 6.535 C 14.544 7.500,14.544 8.500,14.330 9.465 C 13.916 11.326,12.605 12.978,10.867 13.828 C 10.239 14.135,9.591 14.336,8.880 14.444 C 8.456 14.509,7.544 14.509,7.120 14.444 C 5.172 14.148,3.528 13.085,2.493 11.451 C 2.279 11.114,1.999 10.526,1.859 10.119 C 1.618 9.422,1.514 8.781,1.514 8.000 C 1.514 6.961,1.715 6.075,2.160 5.160 C 2.500 4.462,2.846 3.980,3.413 3.413 C 3.980 2.846,4.462 2.500,5.160 2.160 C 6.313 1.599,7.567 1.397,8.853 1.563 M7.706 4.290 C 7.482 4.363,7.355 4.491,7.293 4.705 C 7.257 4.827,7.253 5.106,7.259 6.816 C 7.267 8.786,7.267 8.787,7.325 8.896 C 7.398 9.033,7.538 9.157,7.671 9.204 C 7.803 9.250,8.197 9.250,8.329 9.204 C 8.462 9.157,8.602 9.033,8.675 8.896 C 8.733 8.787,8.733 8.786,8.741 6.816 C 8.749 4.664,8.749 4.662,8.596 4.481 C 8.472 4.333,8.339 4.284,8.040 4.276 C 7.893 4.272,7.743 4.278,7.706 4.290 M7.786 10.530 C 7.597 10.592,7.410 10.753,7.319 10.932 C 7.249 11.072,7.237 11.325,7.294 11.495 C 7.388 11.780,7.697 12.000,8.000 12.000 C 8.303 12.000,8.612 11.780,8.706 11.495 C 8.763 11.325,8.751 11.072,8.681 10.932 C 8.616 10.804,8.460 10.646,8.333 10.580 C 8.217 10.520,7.904 10.491,7.786 10.530 "
+                  stroke="none" fill-rule="evenodd" fill="#FF3737"></path>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+
+        <button class="formbold-btn">Submit</button>
+      </form>
+    </div>
+  </div>
+</body>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(function () {
+      let alerts = document.querySelectorAll(".alert");
+      alerts.forEach(alert => {
+        alert.style.display = "none";
+      });
+    }, 3000);  // Hide after 3 seconds
+  });
+  document.getElementById('upload').addEventListener('change', function (event) {
+    document.getElementById("upload-error").classList.remove("show")
+    const fileList = document.getElementById('fileList');
+    fileList.innerHTML = '';
+    const files = event.target.files;
+
+    for (let i = 0; i < files.length; i++) {
+      // Check file type
+      if (!files[i].type.startsWith("image/")) {
+        document.getElementById("upload-error").classList.add("show");
+        event.target.value = ""; // Reset the input field
+        return;
+      }
+
+      const listItem = `<span class="formbold-filename">
+            ${files[i].name}
+
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="clr()">
+            <g clip-path="url(#clip0_1670_1541)">
+            <path d="M9.00005 7.93906L12.7126 4.22656L13.7731 5.28706L10.0606 8.99956L13.7731 12.7121L12.7126 13.7726L9.00005 10.0601L5.28755 13.7726L4.22705 12.7121L7.93955 8.99956L4.22705 5.28706L5.28755 4.22656L9.00005 7.93906Z" fill="#536387"/>
+            </g>
+            <defs>
+            <clipPath id="clip0_1670_1541">
+            <rect width="18" height="18" fill="white"/>
+            </clipPath>
+            </defs>
+            </svg>
+        </span>`;
+
+      fileList.innerHTML += listItem;
+    }
+  });
+
+  function clr() {
+    document.getElementById('fileList').innerHTML = '';
+  }
+
+  document.querySelector("form").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent form submission initiall
+
+    // Get form elements
+    const nameField = document.getElementById("name");
+    const whoYouAreField = document.getElementById("who_you_are");
+    const ratingField = document.querySelector('input[name="rating"]:checked');
+    const messageField = document.getElementById("message");
+    const uploadField = document.getElementById("upload");
+    const submitButton = document.querySelector(".formbold-btn");
+
+    // Validation flags
+    let isValid = true;
+
+    // Check name
+    if (nameField.value.trim() === "") {
+      document.getElementById("name-error").classList.add("show");
+      nameField.classList.add("error");
+      isValid = false;
+    } else {
+      document.getElementById("name-error").classList.remove("show");
+      nameField.classList.remove("error");
+    }
+
+    // Check "Who You Are"
+    if (whoYouAreField.value.trim() === "") {
+      document.getElementById("who_you_are-error").classList.add("show");
+      whoYouAreField.classList.add("error");
+      isValid = false;
+    } else {
+      document.getElementById("who_you_are-error").classList.remove("show");
+      whoYouAreField.classList.remove("error");
+    }
+
+    // Check rating
+    if (!ratingField) {
+      document.getElementById("rating-error").classList.add("show");
+      isValid = false;
+    } else {
+      document.getElementById("rating-error").classList.remove("show");
+    }
+
+    // Check message
+    if (messageField.value.trim() === "") {
+      document.getElementById("review-error").classList.add("show");
+      messageField.classList.add("error");
+      isValid = false;
+    } else {
+      document.getElementById("review-error").classList.remove("show");
+      messageField.classList.remove("error");
+    }
+
+    // Check file upload
+    if (uploadField.files.length === 0) {
+      document.getElementById("upload-error").classList.add("show");
+      isValid = false;
+    } else {
+      document.getElementById("upload-error").classList.remove("show");
+    }
+
+    // If validation fails, return early
+    if (!isValid) return;
+
+    // Show loading animation inside button
+    submitButton.innerHTML = `<span class="loader">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path fill="none" d="M0 0h24v24H0z"></path> <path d="M18.364 5.636L16.95 7.05A7 7 0 1 0 19 12h2a9 9 0 1 1-2.636-6.364z"></path> </g> </g></svg>
+    </span> Submitting...`;
+    submitButton.disabled = true;
+
+    // Simulate form submission delay (remove this in production)
+    setTimeout(() => {
+      event.target.submit(); // Submit the form
+    }, 4000);
+  });
+</script>
+
+</html>
