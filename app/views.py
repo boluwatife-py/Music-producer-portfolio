@@ -7,7 +7,7 @@ def home(request):
     heroitems = Heropage.objects.first()
     about = About.objects.first()
     whatoffered = WhatOffered.objects.all()
-    audios = AudioFile.objects.all()
+    audios = AudioFile.objects.all().order_by('-id')
 
     context = {
         'title': title.title,
