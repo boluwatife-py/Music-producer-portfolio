@@ -7,7 +7,7 @@ def home(request):
     heroitems = Heropage.objects.first()
     about = About.objects.first()
     whatoffered = WhatOffered.objects.all()
-    audios = AudioFile.objects.all().order_by('-id')
+    audios = AudioFile.objects.filter(visibility='visible').order_by('-id')
 
     context = {
         'title': title.title,
@@ -23,7 +23,7 @@ def home(request):
         'about_list_3': about.about_list_3,
         'long_about': about.long_about,
         'testimonials': Testimonial.objects.all(),
-        'faq': Faq.objects.filter(visibility='visible'),
+        'faq': Faq.objects.all(),
         'audios': audios
     }
     for i, item in enumerate(whatoffered, start=1):
