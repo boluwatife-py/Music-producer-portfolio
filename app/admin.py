@@ -40,8 +40,6 @@ class Home(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
 
-admin.site.register(Testimonial, TestimonialAdmin)
-
 admin.site.register(Heropage, Home)
 admin.site.register(About, Home)
 admin.site.register(WhatOffered, Home)
