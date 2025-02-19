@@ -30,4 +30,18 @@ class AudioFileAdmin(admin.ModelAdmin):
         except Exception:
             messages.error(request, "An unexpected error occurred. Please check your file format and try again.")
 
-admin.site.register(AudioFile, AudioFileAdmin)
+class Home(admin.ModelAdmin):
+    def has_add_permission(self, request):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return True
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+admin.site.register(Testimonial, TestimonialAdmin)
+
+admin.site.register(Heropage, Home)
+admin.site.register(About, Home)
+admin.site.register(WhatOffered, Home)
