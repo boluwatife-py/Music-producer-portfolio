@@ -23,7 +23,7 @@ def home(request):
         'about_list_3': about.about_list_3,
         'long_about': about.long_about,
         'testimonials': Testimonial.objects.all(),
-        'faq': Faq.objects.all(),
+        'faq': Faq.objects.filter(visibility='visible'),
         'audios': audios
     }
     for i, item in enumerate(whatoffered, start=1):
