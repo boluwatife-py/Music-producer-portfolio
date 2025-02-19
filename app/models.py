@@ -100,7 +100,11 @@ class AudioFile(models.Model):
     file_cover = CloudinaryField('image', resource_type='image', blank=False, null=False, validators=[validate_image_file])
     file = CloudinaryField('audio', resource_type='raw', blank=False, null=False, validators=[validate_audio_file])
     uploaded_at = models.DateTimeField(auto_now_add=True)
-    visibility = models.CharField(max_length=50, choices=(('visible', 'visible'), ('hidden','hidden'), default='visible')
+    visibility = models.CharField(
+        max_length=50,
+        choices=[('visible', 'visible'), ('hidden', 'hidden')],
+        default='visible'
+    )
 
     def clean(self):
         """Only validate file fields if a new file is being uploaded"""
