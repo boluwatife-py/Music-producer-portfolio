@@ -833,13 +833,23 @@
   <script src="{% static 'js/main.js'%}"></script>
   <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const players = Plyr.setup('.plyr', {
-        controls: ['play', 'progress', 'current-time', 'mute'],
-        autoplay: false
+  document.addEventListener("DOMContentLoaded", function () {
+    const players = Plyr.setup('.plyr', {
+      controls: ['play', 'progress', 'current-time', 'mute'],
+      autoplay: false
+    });
+
+    players.forEach(player => {
+      player.on('play', () => {
+        players.forEach(p => {
+          if (p !== player) {
+            p.pause();
+          }
+        });
       });
     });
-  </script>
+  });
+</script>
 
 </body>
 
